@@ -29,6 +29,7 @@ $(".btn").click(function() {
 
 function nextSequence() {
 
+    userClickPattern = [];
     level++;
 
     $("#level-title").text("Level " + level);
@@ -56,7 +57,14 @@ function checkAnswer(currentLevel) {
         }
 
     }else {
-        console.log("worng");
+        playSound("wrong");
+        $("body").addClass("game-over");
+        setTimeout(function() {
+            $("body").removeClass("game-over");
+        } ,200);
+
+        $("#level-title").text("Game Over press any key to restart");
+        startOver();
     }
 }
 
@@ -73,6 +81,12 @@ function animatePress(currentColor) {
     setTimeout(function () {
         $("#" + currentColor).removeClass("pressed");
     } , 100);
+}
+
+function startOver() {
+    level = 0;
+    start = false;
+    gamePattern = [];
 }
 
 
